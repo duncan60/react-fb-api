@@ -1,0 +1,15 @@
+{
+  "name": "starter-diy-app",
+  "version": "0.0.1",
+  "authors": [
+    "Duncan Du <tmduncan60@gmail.com>"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "bootstrap": "~3.2.0",
+    "es5-shim": "",
+    "es6-shim": "",
+    "underscore": "1.7.0",
+    "react": "~0.13.1"
+  }
+}

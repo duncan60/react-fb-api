@@ -6,6 +6,9 @@ import fbGraphActions from './actions/fbGraphActions';
 import fbLoginStore from './stores/fbLoginStore';
 import fbGraphStore from './stores/fbUserStore';
 
+//view
+import UserInfo from './view/user-info';
+
 let actionMaps = {
 	login       : fbLoginActions.login,
 	getUserInfo : fbGraphActions.getUserInfo
@@ -14,11 +17,16 @@ let actionMaps = {
 class App extends React.Component {
   	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			userInfo : {
+				picture : '',
+				name    : ''
+			}
+		};
 	}
 	componentDidMount() {
-		fbLoginStore.addChangeListener(this._onFbLoginStoreChange);
-		fbGraphStore.addChangeListener(this._onFbGraphChange);
+		fbLoginStore.addChangeListener(this._onFbLoginStoreChange.bind(this));
+		fbGraphStore.addChangeListener(this._onFbGraphChange.bind(this));
 	}
 	componentWillUnmount() {
 		fbLoginStore.removeChangeListener(this._onFbLoginStoreChange);
@@ -32,17 +40,18 @@ class App extends React.Component {
   	}
 
   	_onFbLoginStoreChange() {
-  		console.log('_onFbLoginStoreChange');
+  		actionMaps.getUserInfo();
   	}
   	_onFbGraphChange() {
-  		console.log('_onFbGraphChange',fbGraphStore.getUserInfo());
+  		this.setState({
+  			userInfo : fbGraphStore.getUserInfo()
+  		});
   	}
   	/* jshint ignore:start */
   	render() {
 		return (
 			<div>
-				<a onClick={this._onLoginHandeler.bind(this)}>Login facebook</a>
-				<a onClick={this._onGetUserInfoHandeler.bind(this)}>get User Info</a>
+				<UserInfo onClickHandler={this._onLoginHandeler.bind(this)} info={this.state.userInfo}  />
 			</div>);
   	}
   	/* jshint ignore:end */

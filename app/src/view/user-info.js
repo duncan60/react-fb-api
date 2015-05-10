@@ -27,7 +27,11 @@ UserInfo.defaultProps = {
 	onClickHandler : function(){},
 	info : {
 		name    : '',
-		picture : ''
+		picture : {
+			data : {
+				url : ''
+			}
+		}
 	}
 };
 export default UserInfo;

@@ -19,7 +19,7 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			userInfo : {
-				picture : '',
+				picture : {data:{url:''}},
 				name    : ''
 			}
 		};

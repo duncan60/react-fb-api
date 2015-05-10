@@ -11,7 +11,17 @@ import '../assets/styles/compass.style';
 */
 
 import React from 'react';
-import HelloMessage from './HelloMessage';
+import App from './app';
+
+window.fbAsyncInit = function() {
+    FB.init({
+     	appId      : '980005962010140',
+      	xfbml      : true,
+      	version    : 'v2.3'
+    });
+ };
+
+
 /* jshint ignore:start */
-React.render(<HelloMessage  name='Webpack & ReactJs !'/>, document.getElementById('app'));
+React.render(<App />, document.getElementById('app'));
 /* jshint ignore:end */

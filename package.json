@@ -4,6 +4,7 @@
   "description": "react 0.13.1 and webpack",
   "main": "app/main.js",
   "dependencies": {
+    "flux": "^2.0.3",
     "react": "^0.13.1",
     "webpack": "^1.7.3"
   },

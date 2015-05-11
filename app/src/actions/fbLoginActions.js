@@ -3,8 +3,8 @@ import appConstants from '../constants/appConstants';
 import fbAPI from '../fbAPI';
 
 var fbLoginActions = {
-	login:function() {
-		fbAPI.login(function(res){
+	login() {
+		fbAPI.login((res) => {
 			if (res.status === 'connected'){
 				appDispatcher.handleAction({
 					actionType : appConstants.FB_LOGIN_SUCCESS,
@@ -15,10 +15,10 @@ var fbLoginActions = {
 			}
 		})
 	},
-	logout:function() {
-		
+	logout() {
+
 	}
 };
 
 
-module.exports = fbLoginActions;
+export default fbLoginActions;

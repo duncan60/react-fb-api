@@ -4,7 +4,7 @@ import fbAPI from '../fbAPI';
 
 var fbGrahpActions = {
 	getUserInfo() {
-		fbAPI.getUserInfo(function(res){
+		fbAPI.getUserInfo((res) => {
 			appDispatcher.handleAction({
 				actionType : appConstants.FB_GIT_USER_INFO,
 				data : res
@@ -14,4 +14,4 @@ var fbGrahpActions = {
 };
 
 
-module.exports = fbGrahpActions;
+export default fbGrahpActions;

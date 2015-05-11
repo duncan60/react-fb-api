@@ -9,7 +9,7 @@ class UserInfo extends React.Component {
 		return (
 			<div>
 				<div>
-					<img src={this.props.info.picture.data.url} />
+					<img src={this.props.info.picture} />
 					<p>{this.props.info.name}</p>
 				</div>
 				<a onClick={this._click.bind(this)}>Login facebook</a>
@@ -20,18 +20,14 @@ class UserInfo extends React.Component {
 
 UserInfo.propsType = {
 	onClickHandler : React.PropTypes.func,
-	info           : React.PropTypes.object
+	info           : React.PropTypes.string
 };
 
 UserInfo.defaultProps = {
 	onClickHandler : function(){},
 	info : {
 		name    : '',
-		picture : {
-			data : {
-				url : ''
-			}
-		}
+		picture : ''
 	}
 };
 export default UserInfo;

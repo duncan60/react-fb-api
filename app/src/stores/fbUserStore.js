@@ -12,7 +12,9 @@ let userInfo = {
 };
 
 function setUserInfo(res){
-	userInfo = res ;
+	userInfo.uid  = res.id;
+	userInfo.name = res.name;
+	userInfo.picture = res.picture.data.url;
 };
 
 var fbUserStore = objectAssign({}, EventEmitter.prototype, {

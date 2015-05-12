@@ -34,6 +34,10 @@ AppDispatcher.register(function(payload) {
 	      	loginSuccess(action.data.authResponse);
 	      	fbLoginStore.emit(CHANGE_EVENT);
 	    break;
+	    case appConstants.FB_LOGOUT:
+	      	loginSuccess({});
+	      	fbLoginStore.emit(CHANGE_EVENT);
+	    break;
     default:
       	return true;
   }

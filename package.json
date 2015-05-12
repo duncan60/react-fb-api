@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "babel-loader": "^4.3.0",
+    "classnames": "^2.1.1",
     "compass-mixins": "^0.12.3",
     "css-loader": "^0.9.1",
     "extract-text-webpack-plugin": "^0.3.8",

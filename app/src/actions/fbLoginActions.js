@@ -16,7 +16,13 @@ var fbLoginActions = {
 		})
 	},
 	logout() {
-
+		fbAPI.logout((res) => {
+			console.log('logout',res);
+			appDispatcher.handleAction({
+				actionType : appConstants.FB_LOGOUT,
+				data : res
+			});
+		})
 	}
 };
 

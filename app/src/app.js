@@ -1,4 +1,5 @@
 import React from 'react';
+import BaseCompoent from './components/base-component';
 //actions
 import fbLoginActions from './actions/fbLoginActions';
 import fbGraphActions from './actions/fbGraphActions';
@@ -7,38 +8,45 @@ import fbLoginStore from './stores/fbLoginStore';
 import fbGraphStore from './stores/fbUserStore';
 
 //view
-import UserInfo from './view/user-info';
+import UserInfo from './components/user-info';
 
 let actionMaps = {
 	login       : fbLoginActions.login,
+	logout      : fbLoginActions.logout,
 	getUserInfo : fbGraphActions.getUserInfo
 }
 
-class App extends React.Component {
+class App extends BaseCompoent {
   	constructor(props) {
 		super(props);
 		this.state = {
 			userInfo : {
-				picture : {data:{url:''}},
+				picture : '',
 				name    : ''
 			}
 		};
+		this._bind(
+			'_onFbLoginStoreChange',
+			'_onFbGraphChange',
+			'_fbLogin',
+			'_fbLogout'
+
+		);
 	}
 	componentDidMount() {
-		fbLoginStore.addChangeListener(this._onFbLoginStoreChange.bind(this));
-		fbGraphStore.addChangeListener(this._onFbGraphChange.bind(this));
+		fbLoginStore.addChangeListener(this._onFbLoginStoreChange);
+		fbGraphStore.addChangeListener(this._onFbGraphChange);
 	}
 	componentWillUnmount() {
 		fbLoginStore.removeChangeListener(this._onFbLoginStoreChange);
 		fbGraphStore.removeChangeListener(this._onFbGraphChange);
 	}
-  	_onLoginHandeler() {
+  	_fbLogin() {
 		actionMaps.login();
   	}
-  	_onGetUserInfoHandeler() {
-		actionMaps.getUserInfo();
+  	_fbLogout() {
+		actionMaps.logout();
   	}
-
   	_onFbLoginStoreChange() {
   		actionMaps.getUserInfo();
   	}
@@ -51,7 +59,10 @@ class App extends React.Component {
   	render() {
 		return (
 			<div>
-				<UserInfo onClickHandler={this._onLoginHandeler.bind(this)} info={this.state.userInfo}  />
+				<UserInfo 
+					onLoginHandler={this._fbLogin}
+					onLogoutHandler={this._fbLogout}
+					info={this.state.userInfo}  />
 			</div>);
   	}
   	/* jshint ignore:end */

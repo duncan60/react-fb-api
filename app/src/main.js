@@ -21,7 +21,6 @@ window.fbAsyncInit = function() {
     });
  };
 
-
 /* jshint ignore:start */
 React.render(<App />, document.getElementById('app'));
 /* jshint ignore:end */

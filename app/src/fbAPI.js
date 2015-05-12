@@ -1,13 +1,18 @@
 module.exports = {
-	login:function(callback) {
-		FB.login(function(response){
-			callback(response)
+	login: (callback) => {
+		FB.login((response) => {
+			callback(response);
 		});
 	},
-	getUserInfo:function(callback) {
+	logout: (callback) => {
+		FB.logout((response) => {
+			callback(response);
+		});
+	},
+	getUserInfo: (callback) => {
 		FB.api(
 		    'me?fields=name,picture{url}',
-		    function (response) {
+		    (response) => {
 		        callback(response);
 		    }
 		);

@@ -5,14 +5,20 @@ import { EventEmitter } from 'events';
 
 const CHANGE_EVENT = 'change';
 
-let authInfo = {
-	accessToken   : '',
-	signedRequest : '',
-	userID        : ''
+let info = {
+	status:'',
+	auth:{
+		accessToken   : '',
+		signedRequest : '',
+		userID        : ''
+	}
+
 };
 
-function loginSuccess(res){
-	authInfo = res ;
+function setInfo(res){
+	console.log(res);
+	info.status = res.status;
+	info.auth = res.authResponse ;
 };
 
 var fbLoginStore = objectAssign({}, EventEmitter.prototype, {
@@ -22,8 +28,14 @@ var fbLoginStore = objectAssign({}, EventEmitter.prototype, {
 	removeChangeListener: function(cb) {
 	    this.removeListener(CHANGE_EVENT, cb);
 	},
-	getAuthInfo: function() {
-	    return authInfo;
+	getStatus: function(){
+		return info.status;
+	},
+	getAuth: function() {
+	    return info.auth;
+	},
+	emitChange: function(){
+		this.emit(CHANGE_EVENT);
 	}
 });
 
@@ -31,12 +43,14 @@ AppDispatcher.register(function(payload) {
   	var action = payload.action;
   	switch(action.actionType){
 	    case appConstants.FB_LOGIN_SUCCESS:
-	      	loginSuccess(action.data.authResponse);
-	      	fbLoginStore.emit(CHANGE_EVENT);
+	      	setInfo(action.data);
+	      	fbLoginStore.emitChange();
+	      	//connected
 	    break;
 	    case appConstants.FB_LOGOUT:
-	      	loginSuccess({});
-	      	fbLoginStore.emit(CHANGE_EVENT);
+	      	ssetInfo(action.data);
+	      	fbLoginStore.emitChange();
+	      	//unknown
 	    break;
     default:
       	return true;

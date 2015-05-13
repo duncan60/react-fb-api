@@ -41,13 +41,14 @@ class App extends BaseCompoent {
 		fbLoginStore.removeChangeListener(this._onFbLoginStoreChange);
 		fbGraphStore.removeChangeListener(this._onFbGraphChange);
 	}
-  	_fbLogin() {
+  	_fbLogin(date) {
 		actionMaps.login();
   	}
   	_fbLogout() {
 		actionMaps.logout();
   	}
   	_onFbLoginStoreChange() {
+  		console.log(fbLoginStore.getStatus());
   		actionMaps.getUserInfo();
   	}
   	_onFbGraphChange() {

@@ -15,9 +15,9 @@ import App from './app';
 
 window.fbAsyncInit = function() {
     FB.init({
-     	appId      : '980005962010140',
-      	xfbml      : true,
-      	version    : 'v2.3'
+        appId   : '980005962010140',
+        xfbml   : true,
+        version : 'v2.3'
     });
  };
 

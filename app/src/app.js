@@ -41,17 +41,18 @@ class App extends BaseCompoent {
 		fbLoginStore.removeChangeListener(this._onFbLoginStoreChange);
 		fbGraphStore.removeChangeListener(this._onFbGraphChange);
 	}
-  	_fbLogin(date) {
+  	_fbLogin() {
 		actionMaps.login();
   	}
   	_fbLogout() {
 		actionMaps.logout();
   	}
-  	_onFbLoginStoreChange() {
-  		console.log('_onFbLoginStoreChange',fbLoginStore.getAuth());
+  	_onFbLoginStoreChange(type) {
+  		console.log('_onFbLoginStoreChange',type);
   		actionMaps.getUserInfo();
   	}
-  	_onFbGraphChange() {
+  	_onFbGraphChange(type) {
+  		console.log('_onFbGraphChange',type);
   		this.setState({
   			userInfo : fbGraphStore.getUserInfo()
   		});

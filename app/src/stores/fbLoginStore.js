@@ -30,8 +30,8 @@ class LoginStore extends EventEmitter {
             this._auth = Immutable.fromJS(res);
         }
     }
-    emitChange() {
-    	this.emit(CHANGE_EVENT);
+    emitChange(type) {
+    	this.emit(CHANGE_EVENT,type);
     }
     addChangeListener(callback) {
 	    this.on(CHANGE_EVENT, callback);
@@ -45,20 +45,23 @@ class LoginStore extends EventEmitter {
 let _LoginStore = new LoginStore();
 
 _LoginStore.dispatchToken = AppDispatcher.register((payload) => {
-  	var action = payload.action;
+  	let action = payload.action,
+  		type   ='';
   	switch(action.actionType){
 	    case AppConstants.FB_LOGIN_SUCCESS:
 	      	_LoginStore.setAuth(action.data);
+	      	type = 'login';
 	      	//connected
 	    break;
 	    case AppConstants.FB_LOGOUT:
 	      	_LoginStore.setAuth(action.data);
+	      	type = 'logout'
 	      	//unknown
 	    break;
     default:
       	return true;
  	}
- 	_LoginStore.emitChange();
+ 	_LoginStore.emitChange(type);
  	return true;
 });
 

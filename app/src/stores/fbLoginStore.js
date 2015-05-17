@@ -1,13 +1,13 @@
 import AppDispatcher from '../dispatcher/appDispatcher';
-import appConstants from '../constants/appConstants';
-import objectAssign  from 'react/lib/Object.assign';
+import AppConstants from '../constants/appConstants';
 import { EventEmitter } from 'events';
+import Immutable from 'immutable';
 
 const CHANGE_EVENT = 'change';
 
-let info = {
+let auth = {
 	status:'',
-	auth:{
+	authResponse:{
 		accessToken   : '',
 		signedRequest : '',
 		userID        : ''
@@ -15,47 +15,52 @@ let info = {
 
 };
 
-function setInfo(res){
-	console.log(res);
-	info.status = res.status;
-	info.auth = res.authResponse ;
-};
-
-var fbLoginStore = objectAssign({}, EventEmitter.prototype, {
-	addChangeListener: function(cb) {
-	    this.on(CHANGE_EVENT, cb);
-	},
-	removeChangeListener: function(cb) {
-	    this.removeListener(CHANGE_EVENT, cb);
-	},
-	getStatus: function(){
-		return info.status;
-	},
-	getAuth: function() {
-	    return info.auth;
-	},
-	emitChange: function(){
-		this.emit(CHANGE_EVENT);
+class LoginStore extends EventEmitter {
+	constructor() {
+        super();
+        let _this = this;
+        _this._auth = Immutable.fromJS({});
+    }
+    getAuth() {
+    	return this._auth;
+    }
+    setAuth(res){
+    	let isIdentical = Immutable.is(this._auth, Immutable.fromJS(res));
+        if (!isIdentical) {
+            this._auth = Immutable.fromJS(res);
+        }
+    }
+    emitChange() {
+    	this.emit(CHANGE_EVENT);
+    }
+    addChangeListener(callback) {
+	    this.on(CHANGE_EVENT, callback);
 	}
-});
+	removeChangeListener(callback) {
+	    this.removeListener(CHANGE_EVENT, callback);
+	}
 
-AppDispatcher.register(function(payload) {
+}
+
+let _LoginStore = new LoginStore();
+
+_LoginStore.dispatchToken = AppDispatcher.register((payload) => {
   	var action = payload.action;
   	switch(action.actionType){
-	    case appConstants.FB_LOGIN_SUCCESS:
-	      	setInfo(action.data);
-	      	fbLoginStore.emitChange();
+	    case AppConstants.FB_LOGIN_SUCCESS:
+	      	_LoginStore.setAuth(action.data);
 	      	//connected
 	    break;
-	    case appConstants.FB_LOGOUT:
-	      	ssetInfo(action.data);
-	      	fbLoginStore.emitChange();
+	    case AppConstants.FB_LOGOUT:
+	      	_LoginStore.setAuth(action.data);
 	      	//unknown
 	    break;
     default:
       	return true;
-  }
+ 	}
+ 	_LoginStore.emitChange();
+ 	return true;
 });
 
 
-module.exports = fbLoginStore;
+export default _LoginStore;;

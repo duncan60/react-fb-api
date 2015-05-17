@@ -48,7 +48,7 @@ class App extends BaseCompoent {
 		actionMaps.logout();
   	}
   	_onFbLoginStoreChange() {
-  		console.log(fbLoginStore.getStatus());
+  		console.log('_onFbLoginStoreChange',fbLoginStore.getAuth());
   		actionMaps.getUserInfo();
   	}
   	_onFbGraphChange() {

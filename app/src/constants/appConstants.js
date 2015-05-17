@@ -5,4 +5,4 @@ var appConstants = {
 };
 
 
-module.exports = appConstants;
+export default  appConstants;

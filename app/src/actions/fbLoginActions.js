@@ -2,10 +2,11 @@ import appDispatcher from '../dispatcher/appDispatcher';
 import appConstants from '../constants/appConstants';
 import fbAPI from '../fbAPI';
 
-var fbLoginActions = {
+let fbLoginActions = {
     login() {
         fbAPI.login((res) => {
-            if (res.status === 'connected'){
+            console.log('res',res);
+            if (res.authResponse){
                 appDispatcher.handleAction({
                     actionType : appConstants.FB_LOGIN_SUCCESS,
                     data : res

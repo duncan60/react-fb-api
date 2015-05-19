@@ -2,7 +2,7 @@ import appDispatcher from '../dispatcher/appDispatcher';
 import appConstants from '../constants/appConstants';
 import fbAPI from '../fbAPI';
 
-var fbGrahpActions = {
+let fbGrahpActions = {
     getUserInfo() {
         fbAPI.getUserInfo((res) => {
             appDispatcher.handleAction({

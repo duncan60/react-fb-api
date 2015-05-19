@@ -17,7 +17,7 @@ class UserInfo extends BaseCompoent {
         this.props.onLogoutHandler();
     }
     _renderUserInfo() {
-        if( this.props.info.name !== '' ) {
+        if( this.props.info.name ) {
             return (
                 <div>
                     <img src={this.props.info.picture} />

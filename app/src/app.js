@@ -16,14 +16,16 @@ let actionMaps = {
     getUserInfo : fbGraphActions.getUserInfo
 }
 
+function getStores() {
+    return {
+        userInfo : fbGraphStore.getUserInfo()
+    }
+}
 class App extends BaseCompoent {
     constructor(props) {
         super(props);
         this.state = {
-            userInfo : {
-                picture : '',
-                name    : ''
-            }
+            userInfo : {}
         };
         this._bind(
             '_onFbLoginStoreChange',
@@ -50,9 +52,7 @@ class App extends BaseCompoent {
         actionMaps.getUserInfo();
     }
     _onFbGraphChange(type) {
-        this.setState({
-            userInfo : fbGraphStore.getUserInfo()
-        });
+        this.setState(getStores());
     }
     /* jshint ignore:start */
     render() {

@@ -2,6 +2,9 @@ module.exports = {
     login: (callback) => {
         FB.login((response) => {
             callback(response);
+        },{
+            scope: 'user_friends,email',
+            return_scopes: true
         });
     },
     logout: (callback) => {

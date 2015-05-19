@@ -15,7 +15,7 @@ class UserStore extends EventEmitter {
     constructor() {
         super();
         let _this = this;
-        _this._userInfo = Immutable.fromJS(userInfo);
+        _this._userInfo = Immutable.Map(userInfo);
     }
     getUserInfo() {
         return this._userInfo.toObject();
@@ -26,9 +26,9 @@ class UserStore extends EventEmitter {
             name    : respone.name,
             picture : respone.picture.data.url
         };
-        let isIdentical = Immutable.is(this._userInfo, Immutable.fromJS(res));
+        let isIdentical = Immutable.is(this._userInfo, Immutable.Map(res));
         if (!isIdentical) {
-            this._userInfo  = Immutable.fromJS(res);
+            this._userInfo  = Immutable.Map(res);
             //console.log('_this._userInfo ',this._userInfo);
             //console.log('>>',this._userInfo.get('picture.data.url'));
             // var _todos = Immutable.OrderedMap();

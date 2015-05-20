@@ -5,6 +5,7 @@ import fbAPI from '../fbAPI';
 let fbGrahpActions = {
     getUserInfo() {
         fbAPI.getUserInfo((res) => {
+        	console.log('res',res);
             appDispatcher.handleAction({
                 actionType : appConstants.FB_GIT_USER_INFO,
                 data : res

@@ -1,9 +1,10 @@
 module.exports = {
     login: (callback) => {
         FB.login((response) => {
+            console.log('response',response);
             callback(response);
         },{
-            scope: 'user_friends,email',
+            scope: 'user_friends,email,user_likes',
             return_scopes: true
         });
     },
@@ -14,7 +15,7 @@ module.exports = {
     },
     getUserInfo: (callback) => {
         FB.api(
-            'me?fields=name,picture{url}',
+            'me?fields=name,picture{url},friends',
             (response) => {
                 callback(response);
             }

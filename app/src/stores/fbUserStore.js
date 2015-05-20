@@ -1,7 +1,7 @@
 import AppDispatcher from '../dispatcher/appDispatcher';
 import AppConstants from '../constants/appConstants';
-import Immutable from 'immutable';
 import { EventEmitter } from 'events';
+import Immutable from 'immutable';
 
 const CHANGE_EVENT = 'change';
 
@@ -14,8 +14,7 @@ let userInfo = {
 class UserStore extends EventEmitter {
     constructor() {
         super();
-        let _this = this;
-        _this._userInfo = Immutable.Map(userInfo);
+        this._userInfo = Immutable.Map(userInfo);
     }
     getUserInfo() {
         return this._userInfo.toObject();

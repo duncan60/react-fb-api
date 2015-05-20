@@ -5,30 +5,23 @@ class UserInfo extends BaseCompoent {
     constructor(props) {
         super(props);
         this._bind(
-            '_renderUserInfo',
-            '_login',
-            '_logout'
+            '_renderUserInfo'
         );
     }
-    _login() {
-        this.props.onLoginHandler();
-    }
-    _logout() {
-        this.props.onLogoutHandler();
-    }
     _renderUserInfo() {
+        const {info} = this.props;
         if( this.props.info.name ) {
             return (
                 <div>
-                    <img src={this.props.info.picture} />
-                    <p>{this.props.info.name}</p>
-                    <a onClick={this._logout}>Logout facebook</a>
+                    <img src={info.picture} />
+                    <p>{info.name}</p>
+                    <a onClick={this.props.onLogoutHandler}>Logout facebook</a>
                 </div>
             );
         }else {
             return (
                 <div>
-                    <a onClick={this._login}>Login facebook</a>
+                    <a onClick={this.props.onLoginHandler}>Login facebook</a>
                 </div>
             )
         }

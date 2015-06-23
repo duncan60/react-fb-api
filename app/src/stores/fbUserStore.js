@@ -73,7 +73,7 @@ let _UserStore = new UserStore();
 _UserStore.dispatchToken = AppDispatcher.register((payload) => {
     let action = payload.action,
         type   = '';
-
+        console.log('_UserStore:',action.actionType);
     switch(action.actionType){
         case AppConstants.FB_GIT_USER_INFO:
             _UserStore.setUserInfo(action.data);

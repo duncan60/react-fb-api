@@ -47,6 +47,7 @@ let _LoginStore = new LoginStore();
 _LoginStore.dispatchToken = AppDispatcher.register((payload) => {
     let action = payload.action,
         type   ='';
+        console.log('_LoginStore:',action.actionType);
     switch(action.actionType){
         case AppConstants.FB_LOGIN_SUCCESS:
             _LoginStore.setAuth(action.data);

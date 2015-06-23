@@ -13,7 +13,8 @@ import UserInfo from './components/user-info';
 let actionMaps = {
     login       : fbLoginActions.login,
     logout      : fbLoginActions.logout,
-    getUserInfo : fbGraphActions.getUserInfo
+    getUserInfo : fbGraphActions.getUserInfo,
+    getFriends  : fbGraphActions.getFriends
 }
 
 function getStores() {
@@ -62,6 +63,7 @@ class App extends BaseCompoent {
                     onLoginHandler={this._fbLogin}
                     onLogoutHandler={this._fbLogout}
                     info={this.state.userInfo}  />
+                <a onClick={actionMaps.getFriends}>get friends</a>
             </div>);
     }
     /* jshint ignore:end */

@@ -8,8 +8,17 @@ let fbGrahpActions = {
         	console.log('res',res);
             appDispatcher.handleAction({
                 actionType : appConstants.FB_GIT_USER_INFO,
-                data : res
+                data       : res
             });
+        })
+    },
+    getFriends() {
+        fbAPI.getFriends((res) => {
+        	console.log('res',res);
+            // appDispatcher.handleAction({
+            //     actionType : appConstants.FB_GIT_USER_INFO,
+            //     data       : res
+            // });
         })
     }
 };

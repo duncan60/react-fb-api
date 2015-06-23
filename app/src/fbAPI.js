@@ -20,6 +20,14 @@ module.exports = {
                 callback(response);
             }
         );
+    },
+    getFriends: (callback) => {
+        FB.api(
+            'me/taggable_friends',
+            (response) => {
+                callback(response);
+            }
+        );
     }
 
 }
